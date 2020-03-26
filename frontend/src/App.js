@@ -1,7 +1,7 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import Header from './Header';
 
-export default function src() {
-  return <h1>Hello World</h1>;
+export default function App() {
+  return <Header />;
 }
