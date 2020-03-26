@@ -50,3 +50,23 @@ form input {
 .button:hover {
   filter: brightness(90%);
 }
+
+
+.back-link {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  color: #41414d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  transition: opacity 0.2s;
+}
+
+.back-link svg {
+  margin-right: 8px;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
