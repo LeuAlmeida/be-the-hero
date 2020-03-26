@@ -25,16 +25,30 @@ module.exports = {
     const { id } = req.params;
     const ong_id = req.headers.authorization;
 
+    if (!ong_id) {
+      return res
+        .status(401)
+        .json({ error: 'You must need an ONG identification.' });
+    }
+
     const incident = await connection('incidents')
       .where('id', id)
       .select('ong_id')
       .first();
 
+    if (!incident || incident.length === 0 || incident === null) {
+      return res.status(401).json({ error: 'Incident does not found.' });
+    }
+
     if (incident.ong_id !== ong_id) {
       return res.status(401).json({ error: 'Operation not permitted.' });
     }
 
-    await connection('incidents').where('id', id).delete();
+    try {
+      await connection('incidents').where('id', id).delete();
+    } catch (err) {
+      return res.status(400).json({ error: 'Incident was not deleted.' });
+    }
 
     return res.status(204).send();
   },
